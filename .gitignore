@@ -1,0 +1,8 @@
+build/
+*.pyc
+*.tar.gz
+.hg/hgrc
+parsetab.py
+parser.out
+m5out/*
+*~
