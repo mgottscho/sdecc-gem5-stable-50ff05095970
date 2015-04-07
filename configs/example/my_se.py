@@ -377,6 +377,13 @@ else:
     MemClass = Simulation.setMemClass(options)
     system.membus = CoherentXBar()
     system.system_port = system.membus.slave
+    
+    # MWG added CommMonitor on DRAM channel
+    system.memMonitor = CommMonitor()
+    system.memMonitor.trace_enable = True
+    system.memMonitor.trace_compress = False
+    system.memMonitor.trace_file = 'mem_chan_trace.trc'
+    system.memMonitor.slave = system.membus.master
     CacheConfig.config_cache(options, system)
     MemConfig.config_mem(options, system)
 

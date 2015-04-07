@@ -35,6 +35,6 @@ $GEM5_DIR/build/X86/gem5.opt\
  --benchmark_stdout=$OUTPUT_DIR/$BENCHMARK.out\
  --benchmark_stderr=$OUTPUT_DIR/$BENCHMARK.err\
  \
- --fast-forward=1000000000\
- --maxinsts=2000000000\
+ --fast-forward=1000000\
+ --maxinsts=1000000\
  --at-instruction

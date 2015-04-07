@@ -190,5 +190,9 @@ def config_mem(options, system):
     system.mem_ctrls = mem_ctrls
 
     # Connect the controllers to the membus
+    #for i in xrange(len(system.mem_ctrls)):
+    #    system.mem_ctrls[i].port = system.membus.master
+    
+    # MWG: Connect the controllers to the memory monitor, which is connected to membus
     for i in xrange(len(system.mem_ctrls)):
-        system.mem_ctrls[i].port = system.membus.master
+        system.mem_ctrls[i].port = system.memMonitor.master
