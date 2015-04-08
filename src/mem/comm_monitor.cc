@@ -220,6 +220,8 @@ CommMonitor::recvTimingReq(PacketPtr pkt)
 						| (static_cast<uint64_t>(data[i*8+6])<<8)
 						| (static_cast<uint64_t>(data[i*8+7]));
 			DPRINTF(CommMonitor, "WORD %d: 0x%02X %02X %02X %02X %02X %02X %02X %02X\n", i, data[i*8], data[i*8+1], data[i*8+2], data[i*8+3], data[i*8+4], data[i*8+5], data[i*8+6], data[i*8+7]);
+			//DPRINTF(CommMonitor, "WORD2 %d: 0x%016X\n", i, data2[i]);
+			//DPRINTF(CommMonitor, "WORD2 %d: %lu\n", i, data2[i]);
 		}
 		DPRINTF(CommMonitor, "------------------------------\n");
 	}
@@ -392,6 +394,7 @@ CommMonitor::recvTimingResp(PacketPtr pkt)
 						| (static_cast<uint64_t>(data[i*8+6])<<8)
 						| (static_cast<uint64_t>(data[i*8+7]));
 			DPRINTF(CommMonitor, "WORD %d: 0x%02X %02X %02X %02X %02X %02X %02X %02X\n", i, data[i*8], data[i*8+1], data[i*8+2], data[i*8+3], data[i*8+4], data[i*8+5], data[i*8+6], data[i*8+7]);
+		//	DPRINTF(CommMonitor, "WORD2 %d: 0x%016X\n", i, data2[i]);
 		}
 		DPRINTF(CommMonitor, "------------------------------\n");
 	}
