@@ -199,6 +199,31 @@ CommMonitor::recvTimingReq(PacketPtr pkt)
     Addr addr = pkt->getAddr();
     bool expects_response = pkt->needsResponse() && !pkt->memInhibitAsserted();
 
+	//MWG
+	bool hasData = pkt->hasData(); 
+	uint8_t data[64];
+	uint64_t data2[8];
+	DPRINTF(CommMonitor, "cmd: %d\n", cmd);
+	if (hasData) {
+		pkt->writeDataToBlock(data,64); 
+		if (is_read)
+			DPRINTF(CommMonitor, "-------- DATA (read) ---------\n");
+		if (is_write)
+			DPRINTF(CommMonitor, "-------- DATA (write) --------\n");
+		for (int i = 0; i < 8; i++) {
+			data2[i] =	 (static_cast<uint64_t>(data[i*8])<<56)
+				     	| (static_cast<uint64_t>(data[i*8+1])<<48)
+						| (static_cast<uint64_t>(data[i*8+2])<<40)
+						| (static_cast<uint64_t>(data[i*8+3])<<32)
+						| (static_cast<uint64_t>(data[i*8+4])<<24)
+						| (static_cast<uint64_t>(data[i*8+5])<<16)
+						| (static_cast<uint64_t>(data[i*8+6])<<8)
+						| (static_cast<uint64_t>(data[i*8+7]));
+			DPRINTF(CommMonitor, "WORD %d: 0x%02X %02X %02X %02X %02X %02X %02X %02X\n", i, data[i*8], data[i*8+1], data[i*8+2], data[i*8+3], data[i*8+4], data[i*8+5], data[i*8+6], data[i*8+7]);
+		}
+		DPRINTF(CommMonitor, "------------------------------\n");
+	}
+
     // If a cache miss is served by a cache, a monitor near the memory
     // would see a request which needs a response, but this response
     // would be inhibited and not come back from the memory. Therefore
@@ -226,6 +251,19 @@ CommMonitor::recvTimingReq(PacketPtr pkt)
         pkt_msg.set_flags(req_flags);
         pkt_msg.set_addr(addr);
         pkt_msg.set_size(size);
+		pkt_msg.set_has_data(hasData);
+
+		//MWG
+		if (hasData) {
+			pkt_msg.set_data0(data2[0]);
+			pkt_msg.set_data1(data2[1]);
+			pkt_msg.set_data2(data2[2]);
+			pkt_msg.set_data3(data2[3]);
+			pkt_msg.set_data4(data2[4]);
+			pkt_msg.set_data5(data2[5]);
+			pkt_msg.set_data6(data2[6]);
+			pkt_msg.set_data7(data2[7]);
+		}
 
         traceStream->write(pkt_msg);
     }
@@ -328,6 +366,35 @@ CommMonitor::recvTimingResp(PacketPtr pkt)
     Tick latency = 0;
     CommMonitorSenderState* received_state =
         dynamic_cast<CommMonitorSenderState*>(pkt->senderState);
+	
+	//MWG
+	// Store relevant fields of packet, because packet may be modified
+    // or even deleted when sendTiming() is called.
+    int cmd = pkt->cmdToIndex();
+    Request::FlagsType req_flags = pkt->req->getFlags();
+    Addr addr = pkt->getAddr();
+	bool hasData = pkt->hasData(); 
+	uint8_t data[64];
+	uint64_t data2[8];
+	DPRINTF(CommMonitor, "cmd: %d\n", cmd);
+	if (hasData) {
+		pkt->writeDataToBlock(data,64); 
+		if (is_read)
+			DPRINTF(CommMonitor, "-------- DATA (read) ---------\n");
+		assert(!is_write);
+		for (int i = 0; i < 8; i++) {
+			data2[i] =	 (static_cast<uint64_t>(data[i*8])<<56)
+				     	| (static_cast<uint64_t>(data[i*8+1])<<48)
+						| (static_cast<uint64_t>(data[i*8+2])<<40)
+						| (static_cast<uint64_t>(data[i*8+3])<<32)
+						| (static_cast<uint64_t>(data[i*8+4])<<24)
+						| (static_cast<uint64_t>(data[i*8+5])<<16)
+						| (static_cast<uint64_t>(data[i*8+6])<<8)
+						| (static_cast<uint64_t>(data[i*8+7]));
+			DPRINTF(CommMonitor, "WORD %d: 0x%02X %02X %02X %02X %02X %02X %02X %02X\n", i, data[i*8], data[i*8+1], data[i*8+2], data[i*8+3], data[i*8+4], data[i*8+5], data[i*8+6], data[i*8+7]);
+		}
+		DPRINTF(CommMonitor, "------------------------------\n");
+	}
 
     if (!stats.disableLatencyHists) {
         // Restore initial sender state
@@ -340,6 +407,33 @@ CommMonitor::recvTimingResp(PacketPtr pkt)
 
     // Attempt to send the packet
     bool successful = slavePort.sendTimingResp(pkt);
+    
+	//MWG
+	if (successful && traceStream != NULL) {
+        // Create a protobuf message representing the
+        // packet. Currently we do not preserve the flags in the
+        // trace.
+        ProtoMessage::Packet pkt_msg;
+        pkt_msg.set_tick(curTick());
+        pkt_msg.set_cmd(cmd);
+        pkt_msg.set_flags(req_flags);
+        pkt_msg.set_addr(addr);
+        pkt_msg.set_size(size);
+		pkt_msg.set_has_data(hasData);
+
+		if (hasData) {
+			pkt_msg.set_data0(data2[0]);
+			pkt_msg.set_data1(data2[1]);
+			pkt_msg.set_data2(data2[2]);
+			pkt_msg.set_data3(data2[3]);
+			pkt_msg.set_data4(data2[4]);
+			pkt_msg.set_data5(data2[5]);
+			pkt_msg.set_data6(data2[6]);
+			pkt_msg.set_data7(data2[7]);
+		}
+
+        traceStream->write(pkt_msg);
+    }
 
     if (!stats.disableLatencyHists) {
         // If packet successfully send, sample value of latency,

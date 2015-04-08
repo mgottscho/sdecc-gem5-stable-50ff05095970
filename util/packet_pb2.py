@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='packet.proto',
   package='ProtoMessage',
-  serialized_pb='\n\x0cpacket.proto\x12\x0cProtoMessage\"A\n\x0cPacketHeader\x12\x0e\n\x06obj_id\x18\x01 \x02(\t\x12\x0e\n\x03ver\x18\x02 \x01(\r:\x01\x30\x12\x11\n\ttick_freq\x18\x03 \x02(\x04\"^\n\x06Packet\x12\x0c\n\x04tick\x18\x01 \x02(\x04\x12\x0b\n\x03\x63md\x18\x02 \x02(\r\x12\x0c\n\x04\x61\x64\x64r\x18\x03 \x02(\x04\x12\x0c\n\x04size\x18\x04 \x02(\r\x12\r\n\x05\x66lags\x18\x05 \x01(\r\x12\x0e\n\x06pkt_id\x18\x06 \x01(\x04')
+  serialized_pb='\n\x0cpacket.proto\x12\x0cProtoMessage\"A\n\x0cPacketHeader\x12\x0e\n\x06obj_id\x18\x01 \x02(\t\x12\x0e\n\x03ver\x18\x02 \x01(\r:\x01\x30\x12\x11\n\ttick_freq\x18\x03 \x02(\x04\"\xe8\x01\n\x06Packet\x12\x0c\n\x04tick\x18\x01 \x02(\x04\x12\x0b\n\x03\x63md\x18\x02 \x02(\r\x12\x0c\n\x04\x61\x64\x64r\x18\x03 \x02(\x04\x12\x0c\n\x04size\x18\x04 \x02(\r\x12\r\n\x05\x66lags\x18\x05 \x01(\r\x12\x0e\n\x06pkt_id\x18\x06 \x01(\x04\x12\x10\n\x08has_data\x18\x07 \x01(\x08\x12\r\n\x05\x64\x61ta0\x18\x08 \x01(\x04\x12\r\n\x05\x64\x61ta1\x18\t \x01(\x04\x12\r\n\x05\x64\x61ta2\x18\n \x01(\x04\x12\r\n\x05\x64\x61ta3\x18\x0b \x01(\x04\x12\r\n\x05\x64\x61ta4\x18\x0c \x01(\x04\x12\r\n\x05\x64\x61ta5\x18\r \x01(\x04\x12\r\n\x05\x64\x61ta6\x18\x0e \x01(\x04\x12\r\n\x05\x64\x61ta7\x18\x0f \x01(\x04')
 
 
 
@@ -109,6 +109,69 @@ _PACKET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='has_data', full_name='ProtoMessage.Packet.has_data', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data0', full_name='ProtoMessage.Packet.data0', index=7,
+      number=8, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data1', full_name='ProtoMessage.Packet.data1', index=8,
+      number=9, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data2', full_name='ProtoMessage.Packet.data2', index=9,
+      number=10, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data3', full_name='ProtoMessage.Packet.data3', index=10,
+      number=11, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data4', full_name='ProtoMessage.Packet.data4', index=11,
+      number=12, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data5', full_name='ProtoMessage.Packet.data5', index=12,
+      number=13, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data6', full_name='ProtoMessage.Packet.data6', index=13,
+      number=14, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data7', full_name='ProtoMessage.Packet.data7', index=14,
+      number=15, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -118,8 +181,8 @@ _PACKET = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=97,
-  serialized_end=191,
+  serialized_start=98,
+  serialized_end=330,
 )
 
 DESCRIPTOR.message_types_by_name['PacketHeader'] = _PACKETHEADER
