@@ -142,6 +142,8 @@ def main():
         else:
             ascii_out.write('%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
                                            packet.tick))
+        if num_packets % 10000 == 0:
+            print "Packet ", num_packets
 
     print "Parsed packets:", num_packets
 
