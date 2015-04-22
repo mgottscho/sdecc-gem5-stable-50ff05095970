@@ -1,4 +1,4 @@
-$GEM5_DIR/build/X86/gem5.opt\
+$GEM5_DIR/build/X86/gem5.fast\
  \
  --outdir=$OUTPUT_DIR\
  \
