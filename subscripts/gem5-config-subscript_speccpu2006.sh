@@ -31,9 +31,9 @@ $GEM5_DIR/build/X86/gem5.opt\
  --mem-channels=1\
  --mem-size="2048MB"\
  \
- --program=$PROGRAM\
- --program_stdout=$OUTPUT_DIR/$PROGRAM.out\
- --program_stderr=$OUTPUT_DIR/$PROGRAM.err\
+ --benchmark=$BENCHMARK\
+ --program_stdout=$OUTPUT_DIR/$BENCHMARK.out\
+ --program_stderr=$OUTPUT_DIR/$BENCHMARK.err\
  \
  --maxinsts=100000000\
  --fast-forward=10000000\

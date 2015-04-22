@@ -115,11 +115,11 @@ parser = optparse.OptionParser()
 Options.addCommonOptions(parser)
 Options.addSEOptions(parser)
 
-# MWG: My SPEC2006 benchmark options
+# MWG
+parser.add_option("-P", "--program", type="string", default="", help="An executable program to be loaded.")
 parser.add_option("-b", "--benchmark", type="string", default="", help="The SPEC benchmark to be loaded.")
-parser.add_option("--benchmark_stdout", type="string", default="", help="Absolute path for stdout redirection for the benchmark.")
-parser.add_option("--benchmark_stderr", type="string", default="", help="Absolute path for stderr redirection for the benchmark.")
-
+parser.add_option("--program_stdout", type="string", default="", help="Absolute path for stdout redirection for the program.")
+parser.add_option("--program_stderr", type="string", default="", help="Absolute path for stderr redirection for the program.")
 
 if '--ruby' in sys.argv:
     Ruby.define_options(parser)
@@ -132,6 +132,10 @@ if args:
 
 multiprocesses = []
 numThreads = 1
+
+if options.benchmark and options.program:
+    print "Cannot select both --benchmark and --program option."
+    sys.exit(1)
 
 if options.benchmark:
 	print 'Selected SPEC_CPU2006 benchmark'
@@ -228,11 +232,13 @@ if options.benchmark:
 	elif options.benchmark == 'specrand_f':
 		print '--> specrand_f'
 		process = spec06_benchmarks.specrand_f
-	else:
-		print "No recognized SPEC2006 benchmark selected! Exiting."
-		sys.exit(1)
+elif options.program:
+    print "Running program: " + options.program
+    process = LiveProcess()
+    process.executable = options.program
+    process.cmd = process.executable
 else:
-    print >> sys.stderr, "Need --benchmark switch to specify SPEC CPU2006 workload. Exiting!\n"
+    print "Need to specify a workload. Exiting."
     sys.exit(1)
 
 #if options.bench:
@@ -263,15 +269,15 @@ else:
 #    print >> sys.stderr, "No workload specified. Exiting!\n"
 #    sys.exit(1)
 
-print "Creating N copies of the selected benchmark." # MWG
+print "Creating N copies of the selected program." # MWG
 for i in xrange(options.num_cpus):
     # Set process stdout/stderr
-    if options.benchmark_stdout:
-        process.output = options.benchmark_stdout
-        print "Process stdout file: " + process.output
-    if options.benchmark_stderr:
-        process.errout = options.benchmark_stderr
-        print "Process stderr file: " + process.errout
+    if options.program_stdout:
+        process.output = options.program_stdout
+        print "Process stdout file: " + process.output + str(i)
+    if options.program_stderr:
+        process.errout = options.program_stderr
+        print "Process stderr file: " + process.errout + str(i)
     multiprocesses.append(process)
 
 (CPUClass, test_mem_mode, FutureClass) = Simulation.setCPUClass(options)
