@@ -121,7 +121,7 @@ def main():
         if packet.HasField('flags'):
             if packet.HasField('has_data'):
                 if packet.has_data == 1: # MWG
-                    ascii_out.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
+                    ascii_out.write('%s,%s,%s,%s,%s,%s,%016X,%016X,%016X,%016X,%016X,%016X,%016X,%016X\n' % (cmd, packet.addr, packet.size,
                                     packet.flags, packet.tick, 
                                     packet.has_data,
                                     packet.data0,
@@ -132,16 +132,20 @@ def main():
                                     packet.data5,
                                     packet.data6,
                                     packet.data7))
-                else:
-                    ascii_out.write('%s,%s,%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
+                else: # MWG
+                    ascii_out.write('%s,%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size,
                                     packet.flags, packet.tick, 
                                     packet.has_data))
             else: # MWG
-                ascii_out.write('%s,%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size, 
-                                packet.flags, packet.tick)) 
+                #ascii_out.write('%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size, 
+                #                packet.flags, packet.tick)) 
+                display("uh oh, this should not have happened")
+                exit(1)
         else:
-            ascii_out.write('%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
-                                           packet.tick))
+        #    ascii_out.write('%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
+                #                           packet.tick))
+            display("uh oh, this should not have happened")
+            exit(1)
         if num_packets % 10000 == 0:
             print "Packet ", num_packets
 

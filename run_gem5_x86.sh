@@ -5,7 +5,7 @@
 
 ################## DIRECTORY VARIABLES: MODIFY ACCORDINGLY #######
 GEM5_DIR=/u/home/puneet/mgottsch/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
-GEM5_CONFIG_SUBSCRIPT=subscripts/gem5-config-subscript.sh			# Path to the gem5 configuration shell script
+GEM5_CONFIG_SUBSCRIPT=subscripts/gem5-config-subscript-no-caches.sh			# Path to the gem5 configuration shell script
 ##################################################################
 
 ARGC=$# # Get number of arguments excluding arg0 (the script itself). Check for help message condition.
