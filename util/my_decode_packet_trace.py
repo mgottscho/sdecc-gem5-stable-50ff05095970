@@ -120,11 +120,10 @@ def main():
             ascii_out.write('%s,' % (packet.pkt_id))
         if packet.HasField('flags'):
             if packet.HasField('has_data'):
+                ascii_out.write('%s,%s,%s,%s,%s,' % (cmd, packet.addr, packet.size, packet.flags, packet.tick)) 
                 if packet.has_data == 1: # MWG
-                    ascii_out.write('%s,%s,%s,%s,%s,%s,%016X,%016X,%016X,%016X,%016X,%016X,%016X,%016X\n' % (cmd, packet.addr, packet.size,
-                                    packet.flags, packet.tick, 
-                                    packet.has_data,
-                                    packet.data0,
+                    ascii_out.write('1,')
+                    ascii_out.write('%016X,%016X,%016X,%016X,%016X,%016X,%016X,%016X\n' % (packet.data0,
                                     packet.data1,
                                     packet.data2,
                                     packet.data3,
@@ -133,9 +132,8 @@ def main():
                                     packet.data6,
                                     packet.data7))
                 else: # MWG
-                    ascii_out.write('%s,%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size,
-                                    packet.flags, packet.tick, 
-                                    packet.has_data))
+                    ascii_out.write('0,')
+                    ascii_out.write('0,0,0,0,0,0,0,0\n')
             else: # MWG
                 #ascii_out.write('%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size, 
                 #                packet.flags, packet.tick)) 
