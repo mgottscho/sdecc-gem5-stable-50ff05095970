@@ -4,7 +4,7 @@
 # mgottscho@ucla.edu
 
 ################## DIRECTORY VARIABLES: MODIFY ACCORDINGLY #######
-GEM5_DIR=/u/home/puneet/mgottsch/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
+GEM5_DIR=/u/home/m/mgottsch/project-puneet/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
 GEM5_CONFIG_SUBSCRIPT=subscripts/gem5-config-subscript-no-caches.sh			# Path to the gem5 configuration shell script
 ##################################################################
 
