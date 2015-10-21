@@ -18,6 +18,6 @@ $GEM5_DIR/build/X86/gem5.fast\
  --program_stdout=$OUTPUT_DIR/$BENCHMARK.out\
  --program_stderr=$OUTPUT_DIR/$BENCHMARK.err\
  \
- --maxinsts=100000000\
- --fast-forward=10000000\
+ --maxinsts=2000000000\
+ --fast-forward=2000000000\
  --at-instruction
