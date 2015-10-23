@@ -76,9 +76,11 @@ except:
         exit(-1)
 
 def main():
-    if len(sys.argv) != 3:
-        print "Usage: ", sys.argv[0], " <protobuf input> <ASCII output>"
+    if len(sys.argv) != 6:
+        print "Usage: ", sys.argv[0], " <protobuf input> <ASCII output> <starting_tick> <ending_tick> <max_packets>"
         exit(-1)
+
+    print "Command line arguments:", sys.argv
 
     # Open the file in read mode
     proto_in = protolib.openFileRd(sys.argv[1])
@@ -104,51 +106,67 @@ def main():
 
     print "Object id:", header.obj_id
     print "Tick frequency:", header.tick_freq
+    starting_tick = long(sys.argv[3])
+    ending_tick = long(sys.argv[4])
+    max_packets = long(sys.argv[5])
 
-    print "Parsing packets"
+    print "Parsing packets from simulation tick: ", str(starting_tick), " to ", str(ending_tick), " max packets = ", max_packets
 
     num_packets = 0
     packet = packet_pb2.Packet()
+    currtick = 0;
 
     # Decode the packet messages until we hit the end of the file
-    while protolib.decodeMessage(proto_in, packet):
-        num_packets += 1
-        # ReadReq is 1 and WriteReq is 4 in src/mem/packet.hh Command enum
-        #cmd = 'r' if packet.cmd == 1 else ('w' if packet.cmd == 4 else 'u') # MWG commented out
-        cmd = packet.cmd # MWG
-        if packet.HasField('pkt_id'):
-            ascii_out.write('%s,' % (packet.pkt_id))
-        if packet.HasField('flags'):
-            if packet.HasField('has_data'):
-                ascii_out.write('%s,%s,%s,%s,%s,' % (cmd, packet.addr, packet.size, packet.flags, packet.tick)) 
-                if packet.has_data == 1: # MWG
-                    ascii_out.write('1,')
-                    ascii_out.write('%016X,%016X,%016X,%016X,%016X,%016X,%016X,%016X\n' % (packet.data0,
-                                    packet.data1,
-                                    packet.data2,
-                                    packet.data3,
-                                    packet.data4,
-                                    packet.data5,
-                                    packet.data6,
-                                    packet.data7))
+    while protolib.decodeMessage(proto_in, packet) and currtick < starting_tick:
+        currtick = long(packet.tick)
+
+    if currtick >= starting_tick and currtick < ending_tick:
+        print "Found first packet of interest at tick ", str(currtick)
+        
+        while protolib.decodeMessage(proto_in, packet) and currtick < ending_tick and num_packets < max_packets:
+            num_packets += 1
+            currtick = long(packet.tick)
+
+            # ReadReq is 1 and WriteReq is 4 in src/mem/packet.hh Command enum
+            #cmd = 'r' if packet.cmd == 1 else ('w' if packet.cmd == 4 else 'u') # MWG commented out
+            cmd = packet.cmd # MWG
+            if packet.HasField('pkt_id'):
+                ascii_out.write('%s,' % (packet.pkt_id))
+            if packet.HasField('flags'):
+                if packet.HasField('has_data'):
+                    ascii_out.write('%s,%s,%s,%s,%s,' % (cmd, packet.addr, packet.size, packet.flags, packet.tick)) 
+                    if packet.has_data == 1: # MWG
+                        ascii_out.write('1,')
+                        ascii_out.write('%016X,%016X,%016X,%016X,%016X,%016X,%016X,%016X\n' % (packet.data0,
+                                        packet.data1,
+                                        packet.data2,
+                                        packet.data3,
+                                        packet.data4,
+                                        packet.data5,
+                                        packet.data6,
+                                        packet.data7))
+                    else: # MWG
+                        ascii_out.write('0,')
+                        ascii_out.write('0,0,0,0,0,0,0,0\n')
                 else: # MWG
-                    ascii_out.write('0,')
-                    ascii_out.write('0,0,0,0,0,0,0,0\n')
-            else: # MWG
-                #ascii_out.write('%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size, 
-                #                packet.flags, packet.tick)) 
+                    #ascii_out.write('%s,%s,%s,%s,%s,,,,,,,\n' % (cmd, packet.addr, packet.size, 
+                    #                packet.flags, packet.tick)) 
+                    display("uh oh, this should not have happened")
+                    exit(1)
+            else:
+            #    ascii_out.write('%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
+                    #                           packet.tick))
                 display("uh oh, this should not have happened")
                 exit(1)
-        else:
-        #    ascii_out.write('%s,%s,%s,%s\n' % (cmd, packet.addr, packet.size,
-                #                           packet.tick))
-            display("uh oh, this should not have happened")
-            exit(1)
-        if num_packets % 10000 == 0:
-            print "Packet ", num_packets
+            if num_packets % 10000 == 0:
+                print "Packet ", num_packets
 
-    print "Parsed packets:", num_packets
+        print "Found last packet of interest at tick ", str(currtick)
+        print "Parsed packets:", num_packets
 
+    else:
+        print "No packets found in tick range of interest: [", starting_tick, ",", ending_tick, ")"
+    
     # We're done
     ascii_out.close()
     proto_in.close()

@@ -14,8 +14,8 @@ fi
 
 ########################## FEEL FREE TO CHANGE THESE OPTIONS ##################################
 #BENCHMARKS="perlbench bzip2 gcc bwaves zeusmp gromacs leslie3d namd gobmk povray sjeng GemsFDTD h264ref lbm astar sphinx3"		# String of SPEC CPU2006 benchmark names to run, delimited by spaces.
-SPEC_BENCHMARKS="perlbench bzip2 gcc"		# String of SPEC CPU2006 benchmark names to run, delimited by spaces.
-BENCHMARKS="dhrystone"
+SPEC_BENCHMARKS="h264ref povray mcf"		# String of SPEC CPU2006 benchmark names to run, delimited by spaces.
+#BENCHMARKS="dhrystone"
 GEM5_CONFIG_SUBSCRIPT_SPEC=$PWD/subscripts/gem5-config-subscript_speccpu2006-no-caches.sh			# Full path to the gem5 config bash subscript
 
 ROOT_OUTPUT_DIR=$PWD/m5out												# Full path to the root output directory for all simulations
