@@ -9,14 +9,14 @@ GEM5_CONFIG_SUBSCRIPT=$PWD/subscripts/gem5-config-subscript-no-caches.sh			# Pat
 ##################################################################
 
 ARGC=$# # Get number of arguments excluding arg0 (the script itself). Check for help message condition.
-if [[ "$ARGC" != 2 ]]; then # Bad number of arguments. 
+if [[ "$ARGC" != 3 ]]; then # Bad number of arguments. 
 	echo "Author: Mark Gottscho"
 	echo "mgottscho@ucla.edu"
 	echo ""
-	echo "This script runs a single gem5 simulation of a program for x86-64 ISA."
+	echo "This script runs a single gem5 simulation of a program."
 	echo ""
-	echo "USAGE: run_gem5_x86.sh <PROGRAM> <OUTPUT_DIR>"
-	echo "EXAMPLE: ./run_gem5_x86.sh dhrystone m5out/dhrystone"
+	echo "USAGE: run_gem5.sh <ISA> <PROGRAM> <OUTPUT_DIR>"
+	echo "EXAMPLE: ./run_gem5.sh X86 dhrystone m5out/dhrystone"
 	echo ""
 	echo "A single --help help or -h argument will bring this message back."
 	exit
@@ -24,7 +24,8 @@ fi
 
 # Get command line input. We will need to check these.
 PROGRAM=$1						# Program binary to run
-OUTPUT_DIR=$2					# Directory to place run output. Make sure this exists!
+ISA=$2                          # Instruction set to simulate.
+OUTPUT_DIR=$3					# Directory to place run output. Make sure this exists!
 
 # Check OUTPUT_DIR existence
 if [[ !(-d "$OUTPUT_DIR") ]]; then

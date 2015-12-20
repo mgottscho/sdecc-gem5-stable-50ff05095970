@@ -9,14 +9,14 @@ SPEC_DIR=/u/home/m/mgottsch/project-puneet/spec_cpu2006_install		# Install locat
 ##################################################################
 
 ARGC=$# # Get number of arguments excluding arg0 (the script itself). Check for help message condition.
-if [[ "$ARGC" != 3 ]]; then # Bad number of arguments. 
+if [[ "$ARGC" != 4 ]]; then # Bad number of arguments. 
 	echo "Author: Mark Gottscho"
 	echo "mgottscho@ucla.edu"
 	echo ""
 	echo "This script runs a single gem5 simulation of a single SPEC CPU2006 benchmark for x86-64 ISA."
 	echo ""
-	echo "USAGE: run_gem5_x86_speccpu2006_benchmark.sh <BENCHMARK> <GEM5_CONFIG_SUBSCRIPT> <OUTPUT_DIR>"
-	echo "EXAMPLE: ./run_gem5_x86_speccpu2006_benchmark.sh bzip2 /FULL/PATH/TO/gem5-config-subscript-foo.sh /FULL/PATH/TO/output_dir"
+	echo "USAGE: run_gem5_speccpu2006_benchmark.sh <ISA> <BENCHMARK> <GEM5_CONFIG_SUBSCRIPT> <OUTPUT_DIR>"
+	echo "EXAMPLE: ./run_gem5_speccpu2006_benchmark.sh X86 bzip2 /FULL/PATH/TO/gem5-config-subscript-foo.sh /FULL/PATH/TO/output_dir"
 	echo ""
 	echo "A single --help help or -h argument will bring this message back."
 	exit
@@ -24,7 +24,8 @@ fi
 
 # Get command line input. We will need to check these.
 BENCHMARK=$1					# Benchmark name, e.g. bzip2
-GEM5_CONFIG_SUBSCRIPT=$2		# full path to the gem5 configuration shell script
+ISA=$2                          # Instruction set to simulate.
+GEM5_CONFIG_SUBSCRIPT=$3		# full path to the gem5 configuration shell script
 OUTPUT_DIR=$3					# Directory to place run output. Make sure this exists!
 
 ######################### BENCHMARK CODENAMES ####################

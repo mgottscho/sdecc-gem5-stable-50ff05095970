@@ -13,7 +13,7 @@ if [[ "$ARGC" != 0 ]]; then # Bad number of arguments.
 fi
 
 ########################## FEEL FREE TO CHANGE THESE OPTIONS ##################################
-ARCH=x86    # Set the target ISA for gem5. benchmarks must be compiled for this as well
+ISA=X86    # Set the target ISA for gem5. benchmarks must be compiled for this as well
 #SPEC_BENCHMARKS="perlbench bzip2 gcc bwaves zeusmp gromacs leslie3d namd gobmk povray sjeng GemsFDTD h264ref lbm astar sphinx3"		# String of SPEC CPU2006 benchmark names to run, delimited by spaces.
 SPEC_BENCHMARKS="perlbench bzip2 gcc mcf povray h264ref"		# String of SPEC CPU2006 benchmark names to run, delimited by spaces.
 #BENCHMARKS="dhrystone"
@@ -48,7 +48,7 @@ for SPEC_BENCHMARK in $SPEC_BENCHMARKS; do
 	SIM_OUTPUT_DIR=$SPEC_BENCHMARK_OUTPUT_DIR
 	mkdir $SIM_OUTPUT_DIR
 
-	qsub -V -N $JOB_NAME -l h_rt=$MAX_TIME_PER_RUN,h_data=$MAX_MEM_PER_RUN -M $MAILING_LIST ./run_gem5_$ARCH\_speccpu2006_benchmark.sh $SPEC_BENCHMARK $GEM5_CONFIG_SUBSCRIPT_SPEC $SIM_OUTPUT_DIR
+	qsub -V -N $JOB_NAME -l h_rt=$MAX_TIME_PER_RUN,h_data=$MAX_MEM_PER_RUN -M $MAILING_LIST ./run_gem5_speccpu2006_benchmark.sh $ISA $SPEC_BENCHMARK $GEM5_CONFIG_SUBSCRIPT_SPEC $SIM_OUTPUT_DIR
 done
 
 # Submit all the generic benchmarks
@@ -63,7 +63,7 @@ done
 #	SIM_OUTPUT_DIR=$BENCHMARK_OUTPUT_DIR
 #	mkdir $SIM_OUTPUT_DIR
 #
-#   qsub -V -N $JOB_NAME -l h_rt=$MAX_TIME_PER_RUN,h_data=$MAX_MEM_PER_RUN -M $MAILING_LIST ./run_gem5_$ARCH\.sh $BENCHMARK $SIM_OUTPUT_DIR
+#   qsub -V -N $JOB_NAME -l h_rt=$MAX_TIME_PER_RUN,h_data=$MAX_MEM_PER_RUN -M $MAILING_LIST ./run_gem5.sh $ISA $BENCHMARK $SIM_OUTPUT_DIR
 #done
 
 
