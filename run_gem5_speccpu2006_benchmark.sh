@@ -173,8 +173,20 @@ if [[ !(-d "$OUTPUT_DIR") ]]; then
 	exit 1
 fi
 
-#RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_amd64-m64-gcc42-nn.0000		# Run directory for the selected SPEC benchmark
-RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips-little-endian.0000		# Run directory for the selected SPEC benchmark
+RUN_DIR=none
+if [[ "$ISA" == "X86" ]]; then
+    RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_amd64-m64-gcc42-nn.0000		# Run directory for the selected SPEC benchmark
+fi
+if [[ "$ISA" == "MIPS" ]]; then
+    RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips-little-endian.0000		# Run directory for the selected SPEC benchmark
+fi
+
+# Sanity check
+if [[ "$RUN_DIR" == "none" ]]; then
+    echo "Input ISA $ISA not allowed currently. Exiting."
+    exit 1
+fi
+
 SCRIPT_OUT=$OUTPUT_DIR/runscript.log															# File log for this script's stdout henceforth
 
 ################## REPORT SCRIPT CONFIGURATION ###################
