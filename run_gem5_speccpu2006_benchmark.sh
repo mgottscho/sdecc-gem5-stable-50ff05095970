@@ -26,7 +26,7 @@ fi
 BENCHMARK=$1					# Benchmark name, e.g. bzip2
 ISA=$2                          # Instruction set to simulate.
 GEM5_CONFIG_SUBSCRIPT=$3		# full path to the gem5 configuration shell script
-OUTPUT_DIR=$3					# Directory to place run output. Make sure this exists!
+OUTPUT_DIR=$4					# Directory to place run output. Make sure this exists!
 
 ######################### BENCHMARK CODENAMES ####################
 PERLBENCH_CODE=400.perlbench
@@ -173,7 +173,8 @@ if [[ !(-d "$OUTPUT_DIR") ]]; then
 	exit 1
 fi
 
-RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_amd64-m64-gcc42-nn.0000		# Run directory for the selected SPEC benchmark
+#RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_amd64-m64-gcc42-nn.0000		# Run directory for the selected SPEC benchmark
+RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips.0000		# Run directory for the selected SPEC benchmark
 SCRIPT_OUT=$OUTPUT_DIR/runscript.log															# File log for this script's stdout henceforth
 
 ################## REPORT SCRIPT CONFIGURATION ###################

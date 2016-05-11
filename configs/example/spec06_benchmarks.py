@@ -7,7 +7,8 @@ from m5.objects import *
 #gem5_dir = '/home/mark/gem5/'
 #spec_dir = '/home/mark/spec_cpu2006_install/'
 #out_dir = gem5_dir + 'spec2006out/'
-alpha_suffix = '_base.amd64-m64-gcc42-nn'
+suffix = '_base.hoffman-mips'
+#suffix = '_base.amd64-m64-gcc42-nn'
 
 #temp
 #binary_dir = spec_dir
@@ -15,7 +16,7 @@ alpha_suffix = '_base.amd64-m64-gcc42-nn'
 
 #400.perlbench
 perlbench = LiveProcess()
-perlbench.executable =  'perlbench' + alpha_suffix
+perlbench.executable =  'perlbench' + suffix
 # TEST CMDS
 #perlbench.cmd = [perlbench.executable] + ['-I.', '-I./lib', 'attrs.pl']
 # REF CMDS
@@ -26,7 +27,7 @@ perlbench.cmd = [perlbench.executable] + ['-I./lib', 'checkspam.pl', '2500', '5'
 
 #401.bzip2
 bzip2 = LiveProcess()
-bzip2.executable =  'bzip2' + alpha_suffix
+bzip2.executable =  'bzip2' + suffix
 # TEST CMDS
 #bzip2.cmd = [bzip2.executable] + ['input.program', '5']
 # REF CMDS
@@ -40,7 +41,7 @@ bzip2.cmd = [bzip2.executable] + ['input.source', '280']
 
 #403.gcc
 gcc = LiveProcess()
-gcc.executable = 'gcc' + alpha_suffix
+gcc.executable = 'gcc' + suffix
 # TEST CMDS
 #gcc.cmd = [gcc.executable] + ['cccp.i', '-o', 'cccp.s']
 # REF CMDS
@@ -57,7 +58,7 @@ gcc.cmd = [gcc.executable] + ['166.i', '-o', '166.s']
 
 #410.bwaves
 bwaves = LiveProcess()
-bwaves.executable = 'bwaves' + alpha_suffix
+bwaves.executable = 'bwaves' + suffix
 # TEST CMDS
 #bwaves.cmd = [bwaves.executable]
 # REF CMDS
@@ -66,7 +67,7 @@ bwaves.cmd = [bwaves.executable]
 
 #416.gamess
 gamess=LiveProcess()
-gamess.executable = 'gamess' + alpha_suffix
+gamess.executable = 'gamess' + suffix
 # TEST CMDS
 #gamess.cmd = [gamess.executable]
 #gamess.input = 'exam29.config'
@@ -81,7 +82,7 @@ gamess.input = 'cytosine.2.config'
 
 #429.mcf
 mcf = LiveProcess()
-mcf.executable =  'mcf' + alpha_suffix
+mcf.executable =  'mcf' + suffix
 # TEST CMDS
 #mcf.cmd = [mcf.executable] + ['inp.in']
 # REF CMDS
@@ -90,7 +91,7 @@ mcf.cmd = [mcf.executable] + ['inp.in']
 
 #433.milc
 milc=LiveProcess()
-milc.executable = 'milc' + alpha_suffix
+milc.executable = 'milc' + suffix
 # TEST CMDS
 #milc.cmd = [milc.executable]
 #milc.input = 'su3imp.in'
@@ -101,7 +102,7 @@ milc.input = 'su3imp.in'
 
 #434.zeusmp
 zeusmp=LiveProcess()
-zeusmp.executable = 'zeusmp' + alpha_suffix
+zeusmp.executable = 'zeusmp' + suffix
 # TEST CMDS
 #zeusmp.cmd = [zeusmp.executable]
 # REF CMDS
@@ -110,7 +111,7 @@ zeusmp.cmd = [zeusmp.executable]
 
 #435.gromacs
 gromacs = LiveProcess()
-gromacs.executable = 'gromacs' + alpha_suffix
+gromacs.executable = 'gromacs' + suffix
 # TEST CMDS
 #gromacs.cmd = [gromacs.executable] + ['-silent','-deffnm', 'gromacs', '-nice','0']
 # REF CMDS
@@ -119,7 +120,7 @@ gromacs.cmd = [gromacs.executable] + ['-silent','-deffnm', 'gromacs', '-nice','0
 
 #436.cactusADM
 cactusADM = LiveProcess()
-cactusADM.executable = 'cactusADM' + alpha_suffix 
+cactusADM.executable = 'cactusADM' + suffix 
 # TEST CMDS
 #cactusADM.cmd = [cactusADM.executable] + ['benchADM.par']
 # REF CMDS
@@ -128,7 +129,7 @@ cactusADM.cmd = [cactusADM.executable] + ['benchADM.par']
 
 #437.leslie3d
 leslie3d=LiveProcess()
-leslie3d.executable = 'leslie3d' + alpha_suffix
+leslie3d.executable = 'leslie3d' + suffix
 # TEST CMDS
 #leslie3d.cmd = [leslie3d.executable]
 #leslie3d.input = 'leslie3d.in'
@@ -139,7 +140,7 @@ leslie3d.input = 'leslie3d.in'
 
 #444.namd
 namd = LiveProcess()
-namd.executable = 'namd' + alpha_suffix
+namd.executable = 'namd' + suffix
 # TEST CMDS
 #namd.cmd = [namd.executable] + ['--input', 'namd.input', '--output', 'namd.out', '--iterations', '1']
 # REF CMDS
@@ -148,7 +149,7 @@ namd.cmd = [namd.executable] + ['--input', 'namd.input', '--output', 'namd.out',
 
 #445.gobmk
 gobmk=LiveProcess()
-gobmk.executable = 'gobmk' + alpha_suffix
+gobmk.executable = 'gobmk' + suffix
 # TEST CMDS
 #gobmk.cmd = [gobmk.executable] + ['--quiet','--mode', 'gtp']
 #gobmk.input = 'dniwog.tst'
@@ -168,7 +169,7 @@ gobmk.input = '13x13.tst'
 #447.dealII
 ####### NOT WORKING #########
 dealII=LiveProcess()
-dealII.executable = 'dealII' + alpha_suffix
+dealII.executable = 'dealII' + suffix
 # TEST CMDS
 ####### NOT WORKING #########
 #dealII.cmd = [gobmk.executable]+['8']
@@ -178,7 +179,7 @@ dealII.executable = 'dealII' + alpha_suffix
 
 #450.soplex
 soplex=LiveProcess()
-soplex.executable = 'soplex' + alpha_suffix
+soplex.executable = 'soplex' + suffix
 # TEST CMDS
 #soplex.cmd = [soplex.executable] + ['-m10000', 'test.mps']
 # REF CMDS
@@ -188,7 +189,7 @@ soplex.cmd = [soplex.executable] + ['-m45000', 'pds-50.mps']
 
 #453.povray
 povray=LiveProcess()
-povray.executable = 'povray' + alpha_suffix
+povray.executable = 'povray' + suffix
 # TEST CMDS
 #povray.cmd = [povray.executable] + ['SPEC-benchmark-test.ini']
 # REF CMDS
@@ -197,7 +198,7 @@ povray.cmd = [povray.executable] + ['SPEC-benchmark-ref.ini']
 
 #454.calculix
 calculix=LiveProcess()
-calculix.executable = 'calculix' + alpha_suffix
+calculix.executable = 'calculix' + suffix
 # TEST CMDS
 #calculix.cmd = [calculix.executable] + ['-i', 'beampic']
 # REF CMDS
@@ -206,7 +207,7 @@ calculix.cmd = [calculix.executable] + ['-i', 'hyperviscoplastic']
 
 #456.hmmer
 hmmer=LiveProcess()
-hmmer.executable = 'hmmer' + alpha_suffix
+hmmer.executable = 'hmmer' + suffix
 # TEST CMDS
 #hmmer.cmd = [hmmer.executable] + ['--fixed', '0', '--mean', '325', '--num', '45000', '--sd', '200', '--seed', '0', 'bombesin.hmm']
 # REF CMDS
@@ -216,7 +217,7 @@ hmmer.cmd = [hmmer.executable] + ['nph3.hmm', 'swiss41']
 
 #458.sjeng
 sjeng=LiveProcess()
-sjeng.executable = 'sjeng' + alpha_suffix 
+sjeng.executable = 'sjeng' + suffix 
 # TEST CMDS
 #sjeng.cmd = [sjeng.executable] + ['test.txt']
 # REF CMDS
@@ -225,7 +226,7 @@ sjeng.cmd = [sjeng.executable] + ['ref.txt']
 
 #459.GemsFDTD
 GemsFDTD=LiveProcess()
-GemsFDTD.executable = 'GemsFDTD' + alpha_suffix 
+GemsFDTD.executable = 'GemsFDTD' + suffix 
 # TEST CMDS
 #GemsFDTD.cmd = [GemsFDTD.executable]
 # REF CMDS
@@ -234,7 +235,7 @@ GemsFDTD.cmd = [GemsFDTD.executable]
 
 #462.libquantum
 libquantum=LiveProcess()
-libquantum.executable = 'libquantum' + alpha_suffix
+libquantum.executable = 'libquantum' + suffix
 # TEST CMDS
 #libquantum.cmd = [libquantum.executable] + ['33','5']
 # REF CMDS
@@ -243,7 +244,7 @@ libquantum.cmd = [libquantum.executable] + ['1297','8']
 
 #464.h264ref
 h264ref=LiveProcess()
-h264ref.executable = 'h264ref' + alpha_suffix
+h264ref.executable = 'h264ref' + suffix
 # TEST CMDS
 #h264ref.cmd = [h264ref.executable] + ['-d', 'foreman_test_encoder_baseline.cfg']
 # REF CMDS
@@ -254,7 +255,7 @@ h264ref.cmd = [h264ref.executable] + ['-d', 'foreman_ref_encoder_baseline.cfg']
 
 #465.tonto
 tonto=LiveProcess()
-tonto.executable = 'tonto' + alpha_suffix
+tonto.executable = 'tonto' + suffix
 # TEST CMDS
 #tonto.cmd = [tonto.executable]
 # REF CMDS
@@ -263,7 +264,7 @@ tonto.cmd = [tonto.executable]
 
 #470.lbm
 lbm=LiveProcess()
-lbm.executable = 'lbm' + alpha_suffix
+lbm.executable = 'lbm' + suffix
 # TEST CMDS
 #lbm.cmd = [lbm.executable] + ['20', 'reference.dat', '0', '1', '100_100_130_cf_a.of']
 # REF CMDS
@@ -272,7 +273,7 @@ lbm.cmd = [lbm.executable] + ['300', 'reference.dat', '0', '0', '100_100_130_ldc
 
 #471.omnetpp
 omnetpp=LiveProcess()
-omnetpp.executable = 'omnetpp' + alpha_suffix 
+omnetpp.executable = 'omnetpp' + suffix 
 # TEST CMDS
 #omnetpp.cmd = [omnetpp.executable] + ['omnetpp.ini']
 # REF CMDS
@@ -281,7 +282,7 @@ omnetpp.cmd = [omnetpp.executable] + ['omnetpp.ini']
 
 #473.astar
 astar=LiveProcess()
-astar.executable = 'astar' + alpha_suffix
+astar.executable = 'astar' + suffix
 # TEST CMDS
 #astar.cmd = [astar.executable] + ['lake.cfg']
 # REF CMDS
@@ -290,7 +291,7 @@ astar.cmd = [astar.executable] + ['rivers.cfg']
 
 #481.wrf
 wrf=LiveProcess()
-wrf.executable = 'wrf' + alpha_suffix
+wrf.executable = 'wrf' + suffix
 # TEST CMDS
 #wrf.cmd = [wrf.executable]
 # REF CMDS
@@ -299,7 +300,7 @@ wrf.cmd = [wrf.executable]
 
 #482.sphinx3
 sphinx3=LiveProcess()
-sphinx3.executable = 'sphinx_livepretend' + alpha_suffix 
+sphinx3.executable = 'sphinx_livepretend' + suffix 
 # TEST CMDS
 #sphinx3.cmd = [sphinx3.executable] + ['ctlfile', '.', 'args.an4']
 # REF CMDS
@@ -309,7 +310,7 @@ sphinx3.cmd = [sphinx3.executable] + ['ctlfile', '.', 'args.an4']
 #483.xalancbmk
 ######## NOT WORKING ###########
 xalancbmk=LiveProcess()
-xalancbmk.executable = 'xalancbmk' + alpha_suffix
+xalancbmk.executable = 'xalancbmk' + suffix
 # TEST CMDS
 ######## NOT WORKING ###########
 #xalancbmk.cmd = [xalancbmk.executable] + ['-v','test.xml','xalanc.xsl']
@@ -319,7 +320,7 @@ xalancbmk.executable = 'xalancbmk' + alpha_suffix
 
 #998.specrand
 specrand_i=LiveProcess()
-specrand_i.executable = 'specrand' + alpha_suffix
+specrand_i.executable = 'specrand' + suffix
 # TEST CMDS
 #specrand_i.cmd = [specrand_i.executable] + ['324342', '24239']
 # REF CMDS
@@ -328,7 +329,7 @@ specrand_i.cmd = [specrand_i.executable] + ['1255432124', '234923']
 
 #999.specrand
 specrand_f=LiveProcess()
-specrand_f.executable = 'specrand' + alpha_suffix
+specrand_f.executable = 'specrand' + suffix
 # TEST CMDS
 #specrand_f.cmd = [specrand_f.executable] + ['324342', '24239']
 # REF CMDS

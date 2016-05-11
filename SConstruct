@@ -948,7 +948,6 @@ if not conf.CheckLibWithHeader('z', 'zlib.h', 'C++','zlibVersion();'):
 main['HAVE_PROTOBUF'] = main['PROTOC'] and \
     conf.CheckLibWithHeader('protobuf', 'google/protobuf/message.h',
                             'C++', 'GOOGLE_PROTOBUF_VERIFY_VERSION;')
-
 # If we have the compiler but not the library, print another warning.
 if main['PROTOC'] and not main['HAVE_PROTOBUF']:
     print termcap.Yellow + termcap.Bold + \
