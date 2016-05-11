@@ -7,7 +7,7 @@ from m5.objects import *
 #gem5_dir = '/home/mark/gem5/'
 #spec_dir = '/home/mark/spec_cpu2006_install/'
 #out_dir = gem5_dir + 'spec2006out/'
-suffix = '_base.hoffman-mips'
+suffix = '_base.hoffman-mips-little-endian'
 #suffix = '_base.amd64-m64-gcc42-nn'
 
 #temp

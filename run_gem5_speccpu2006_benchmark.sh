@@ -174,7 +174,7 @@ if [[ !(-d "$OUTPUT_DIR") ]]; then
 fi
 
 #RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_amd64-m64-gcc42-nn.0000		# Run directory for the selected SPEC benchmark
-RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips.0000		# Run directory for the selected SPEC benchmark
+RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips-little-endian.0000		# Run directory for the selected SPEC benchmark
 SCRIPT_OUT=$OUTPUT_DIR/runscript.log															# File log for this script's stdout henceforth
 
 ################## REPORT SCRIPT CONFIGURATION ###################
