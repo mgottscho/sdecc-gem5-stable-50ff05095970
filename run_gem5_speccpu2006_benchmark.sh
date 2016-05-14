@@ -180,6 +180,12 @@ fi
 if [[ "$ISA" == "MIPS" ]]; then
     RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-mips-little-endian.0000		# Run directory for the selected SPEC benchmark
 fi
+if [[ "$ISA" == "ARM" ]]; then
+    RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_hoffman-aarch64.0000		# Run directory for the selected SPEC benchmark
+fi
+if [[ "$ISA" == "ALPHA" ]]; then
+    RUN_DIR=$SPEC_DIR/benchspec/CPU2006/$BENCHMARK_CODE/run/run_base_ref_my-alpha.0000		# Run directory for the selected SPEC benchmark
+fi
 
 # Sanity check
 if [[ "$RUN_DIR" == "none" ]]; then

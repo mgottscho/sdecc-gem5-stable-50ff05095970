@@ -241,6 +241,23 @@ else:
     print "Need to specify a workload. Exiting."
     sys.exit(1)
 
+# Append appropriate filename suffix depending on target ISA
+if buildEnv['TARGET_ISA'] == "mips":
+    suffix = '_base.hoffman-mips-little-endian'
+elif buildEnv['TARGET_ISA'] == "arm":
+    suffix = '_base.hoffman-aarch64'
+elif buildEnv['TARGET_ISA'] == "x86":
+    suffix = '_base.amd64-m64-gcc42-nn'
+elif buildEnv['TARGET_ISA'] == "alpha":
+    suffix = '_base.my-alpha'
+else:
+    suffix = 'FAIL'
+    print >> sys.stderr, "SPEC CPU2006 support for target ISA not currently supported! Exiting!\n"
+    sys.exit(1)
+process.executable = process.executable + suffix
+
+print "Process executable: " + process.executable
+
 #if options.bench:
 #    apps = options.bench.split("-")
 #    if len(apps) != options.num_cpus:

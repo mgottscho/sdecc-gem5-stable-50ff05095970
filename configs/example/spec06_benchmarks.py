@@ -8,7 +8,8 @@ from m5.objects import *
 #spec_dir = '/home/mark/spec_cpu2006_install/'
 #out_dir = gem5_dir + 'spec2006out/'
 #suffix = '_base.hoffman-mips-little-endian'
-suffix = '_base.amd64-m64-gcc42-nn'
+#suffix = '_base.amd64-m64-gcc42-nn'
+suffix = "" # FIXME: placeholder
 
 #temp
 #binary_dir = spec_dir
