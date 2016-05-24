@@ -1,0 +1,411 @@
+// -*- mode:c++ -*-
+
+// Copyright (c) 2015 Riscv Developers
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met: redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer;
+// redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution;
+// neither the name of the copyright holders nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Authors: Maxwell Walter
+
+////////////////////////////////////////////////////////////////////
+//
+// The actual Riscv ISA decoder
+// -----------------------------
+//
+
+
+decode OPCODE default Unknown::unknown() {
+0x5b: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::custom2({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::custom2_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::custom2_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::custom2_rd({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::custom2_rd_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::custom2_rd_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x6f: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::jal({{
+		//Implement Instruction Here
+          DPRINTF(RiscvPRA, "jal, PC=%x, NPC=%x", PC, NPC);
+          Rd = NPC;
+          NPC = PC + ((UJIMMBITS10TO1 << 1) + (UJIMMBIT11 << 11) + (UJIMMBITS19TO12 << 12) + (IMMSIGN << 20));
+          DPRINTF(RiscvPRA, "jal, PC=%x, NPC=%x", PC, NPC);
+	}});
+
+}
+
+0x23: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::sb({{
+		//Implement Instruction Here
+	}});
+
+	0x1: BasicOp::sh({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::sw({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::sd({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x7b: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::custom3({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::custom3_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::custom3_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::custom3_rd({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::custom3_rd_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::custom3_rd_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x13: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::addi({{
+		//Implement Instruction Here
+          Rd = Rs1 + IMM12;
+	}});
+
+	0x1: BasicOp::slli({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::slti({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::sltiu({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::xori({{
+		//Implement Instruction Here
+	}});
+
+	0x5: decode FUNCT7 default Unknown::unknown() {
+    0x0: BasicOp::srli({{
+          //Implement Instruction Here
+    }});
+    0x20: BasicOp::srai({{
+          //Implement Instruction Here
+    }});
+  }
+
+	0x6: BasicOp::ori({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::andi({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0xf: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::fence({{
+		//Implement Instruction Here
+	}});
+
+	0x1: BasicOp::fence_i({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x17: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::auipc({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x37: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::lui({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x33: decode FUNCT3 default Unknown::unknown() {
+	0x0: decode FUNCT7 default Unknown::unknown() {
+    0x0: BasicOp::add({{
+          Rd = Rs1 + Rs2;
+    }});
+
+    0x20: BasicOp::sub({{
+          Rd = Rs1 - Rs2;
+    }});
+  }
+
+	0x5: decode FUNCT7 default Unknown::unknown() {
+    0x0: BasicOp::srl({{
+          //Implement Instruction Here
+   }});
+
+    0x20: BasicOp::sra({{
+          //Implement Instruction Here
+   }});
+  }
+
+	0x1: BasicOp::sll({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::slt({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::sltu({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::xor({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::or({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::and({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0xb: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::custom0({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::custom0_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::custom0_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::custom0_rd({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::custom0_rd_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::custom0_rd_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x2b: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::custom1({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::custom1_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::custom1_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::custom1_rd({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::custom1_rd_rs1({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::custom1_rd_rs1_rs2({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x67: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::jalr({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x3: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::lb({{
+		//Implement Instruction Here
+	}});
+
+	0x1: BasicOp::lh({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::lw({{
+		//Implement Instruction Here
+	}});
+
+	0x3: BasicOp::ld({{
+		//Implement Instruction Here
+	}});
+
+	0x4: BasicOp::lbu({{
+		//Implement Instruction Here
+	}});
+
+	0x5: BasicOp::lhu({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::lwu({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x63: decode FUNCT3 default Unknown::unknown() {
+	0x0: BasicOp::beq({{
+		//Implement Instruction Here
+        if (Rs1 == Rs2) {
+          NPC=NPC;
+
+          NPC = PC + ((BIMM12BITS4TO1 << 1) + (BIMM12BITS10TO5 << 5) + (BIMM12BIT11 << 11) + (IMMSIGN << 12));
+        }
+	}});
+
+	0x1: BasicOp::bne({{
+		//Implement Instruction Here
+        DPRINTF(RiscvPRA, "bne, PC=%x, NPC=%x, Rs1=%d, Rs2=%d", PC, NPC, Rs1, Rs2);
+        if (Rs1 != Rs2) {
+          NPC=NPC;
+
+          NPC = PC + ((BIMM12BITS4TO1 << 1) + (BIMM12BITS10TO5 << 5) + (BIMM12BIT11 << 11) + (IMMSIGN << 12));
+          DPRINTF(RiscvPRA, "bne, PC=%x, NPC=%x", PC, NPC);
+        }
+	}});
+
+	0x4: BasicOp::blt({{
+		//Implement Instruction Here
+	}});
+
+	0x5: BasicOp::bge({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::bltu({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::bgeu({{
+		//Implement Instruction Here
+	}});
+
+}
+
+0x73: decode FUNCT3 default Unknown::unknown() {
+  0x0: decode SYSTEMFUNC default Unknown::unknown() {
+    0x0: BasicOp::scall({{
+          //Implement Instruction Here
+    }});
+
+    0x1: BasicOp::sbreak({{
+          //Implement Instruction Here
+    }});
+
+    0x800: BasicOp::sret({{
+          //Implement Instruction Here
+    }});
+  }
+
+	0x1: BasicOp::csrrw({{
+		//Implement Instruction Here
+	}});
+
+	0x2: BasicOp::csrrs({{
+		//Implement Instruction Here
+          //MiscReg hartid = Hartid;
+          DPRINTF(RiscvPRA, "csrrrs hartid");
+          Rd = Hartid;
+	}});
+
+	0x3: BasicOp::csrrc({{
+		//Implement Instruction Here
+	}});
+
+	0x5: BasicOp::csrrwi({{
+		//Implement Instruction Here
+	}});
+
+	0x6: BasicOp::csrrsi({{
+		//Implement Instruction Here
+	}});
+
+	0x7: BasicOp::csrrci({{
+		//Implement Instruction Here
+	}});
+
+}
+
+}
