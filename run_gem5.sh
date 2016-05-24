@@ -23,8 +23,8 @@ if [[ "$ARGC" != 3 ]]; then # Bad number of arguments.
 fi
 
 # Get command line input. We will need to check these.
-PROGRAM=$1						# Program binary to run
-ISA=$2                          # Instruction set to simulate.
+ISA=$1                          # Instruction set to simulate.
+PROGRAM=$2						# Program binary to run
 OUTPUT_DIR=$3					# Directory to place run output. Make sure this exists!
 
 # Check OUTPUT_DIR existence

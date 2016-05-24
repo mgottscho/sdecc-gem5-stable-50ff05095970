@@ -4,8 +4,10 @@
 # mgottscho@ucla.edu
 
 ################## DIRECTORY VARIABLES: MODIFY ACCORDINGLY #######
-GEM5_DIR=/u/home/m/mgottsch/project-puneet/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
-SPEC_DIR=/u/home/m/mgottsch/project-puneet/spec_cpu2006_install		# Install location of your SPEC2006 benchmarks
+#GEM5_DIR=/u/home/m/mgottsch/project-puneet/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
+#SPEC_DIR=/u/home/m/mgottsch/project-puneet/spec_cpu2006_install		# Install location of your SPEC2006 benchmarks
+GEM5_DIR=~/Git/eccgrp-gem5-stable-50ff05095970	# Install location of gem5
+SPEC_DIR=~/Git/spec-cpu2006-nanocad-prep		# Install location of your SPEC2006 benchmarks
 ##################################################################
 
 ARGC=$# # Get number of arguments excluding arg0 (the script itself). Check for help message condition.
@@ -23,8 +25,8 @@ if [[ "$ARGC" != 4 ]]; then # Bad number of arguments.
 fi
 
 # Get command line input. We will need to check these.
-BENCHMARK=$1					# Benchmark name, e.g. bzip2
-ISA=$2                          # Instruction set to simulate.
+ISA=$1                          # Instruction set to simulate.
+BENCHMARK=$2					# Benchmark name, e.g. bzip2
 GEM5_CONFIG_SUBSCRIPT=$3		# full path to the gem5 configuration shell script
 OUTPUT_DIR=$4					# Directory to place run output. Make sure this exists!
 
