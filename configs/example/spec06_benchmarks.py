@@ -240,7 +240,7 @@ libquantum.executable = 'libquantum' + suffix
 # TEST CMDS
 #libquantum.cmd = [libquantum.executable] + ['33','5']
 # REF CMDS
-libquantum.cmd = [libquantum.executable] + ['1297','8']
+libquantum.cmd = [libquantum.executable] + ['1397','8']
 #libquantum.output = out_dir + 'libquantum.out' 
 
 #464.h264ref
@@ -269,7 +269,7 @@ lbm.executable = 'lbm' + suffix
 # TEST CMDS
 #lbm.cmd = [lbm.executable] + ['20', 'reference.dat', '0', '1', '100_100_130_cf_a.of']
 # REF CMDS
-lbm.cmd = [lbm.executable] + ['300', 'reference.dat', '0', '0', '100_100_130_ldc.of']
+lbm.cmd = [lbm.executable] + ['3000', 'reference.dat', '0', '0', '100_100_130_ldc.of']
 #lbm.output = out_dir + 'lbm.out'
 
 #471.omnetpp
